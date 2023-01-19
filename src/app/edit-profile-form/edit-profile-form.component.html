@@ -1,0 +1,64 @@
+<form [formGroup]="form" (submit)="save()">
+    <div class="mb-3">
+      <label for="nameInput1" class="form-label">Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        class="form-control"
+        id="nameInput1"
+        placeholder="Monkey D Luffy"
+        (input)="logValidationErrors()"
+      />
+      <div class="invalid-feedback" *ngIf="formErrors.name" style="display: block;">
+          {{ formErrors.name }}
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="emailInput1" class="form-label">Email address</label>
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="emailInput1"
+        placeholder="luffy@onepiece.com"
+        (input)="logValidationErrors()"
+      />
+      <div class="invalid-feedback" *ngIf="formErrors.email" style="display: block;">
+          {{ formErrors.email }}
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="contactInput1" class="form-label">Contact</label>
+      <input
+        formControlName="contact"
+        type="number"
+        class="form-control"
+        id="contactInput1"
+        placeholder="East Blue"
+        (input)="logValidationErrors()"
+      />
+      <div class="invalid-feedback" *ngIf="formErrors.contact" style="display: block;">
+          {{ formErrors.contact }}
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label for="userImage" class="form-label">Upload profile picture</label>
+      <input
+        class="form-control"
+        type="file"
+        id="userImage"
+        accept=".png, .jpg, .jpeg"
+      />
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+  </form>
+  

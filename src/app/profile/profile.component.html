@@ -1,0 +1,84 @@
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">Bridgera Task</span>
+      </a>
+    </header>
+
+    <div class="card">
+        <div class="card-header">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddUserModal">Add User</button>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of users">
+                    <th scope="row">
+                        <img class="img" src="https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg" alt="" width="100">
+                    </th>
+                    <td>{{ user.name | titlecase }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.contact }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="openAddModal(user)">Edit</button>
+                        <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user._id)">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="AddUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="AddUserModalLabel">Modal title</h1>
+          <button #closeAddModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <app-add-profile-form
+                (onFormSubmit)="onUserAdd($event)"></app-add-profile-form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="EditUserModal" tabindex="-1" aria-labelledby="EditUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="EditUserModalLabel">Modal title</h1>
+          <button #closeEditModalButton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <app-edit-profile-form
+                [user]="user"
+                (onFormSubmit)="onUserEdit($event)"></app-edit-profile-form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Hidden Buttons -->
+<button
+  #addModalButton
+  data-bs-toggle="modal"
+  data-bs-target="#EditUserModal"
+  [hidden]="true">Open Add Form
+</button>
